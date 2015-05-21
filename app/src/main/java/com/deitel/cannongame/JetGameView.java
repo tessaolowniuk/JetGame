@@ -20,6 +20,7 @@ import android.view.SurfaceView;
 import java.io.IOException;
 import java.io.InputStream;
 
+import cornelius.tessa.victor.MyWorld;
 import edu.noctrl.craig.generic.GameSprite;
 import edu.noctrl.craig.generic.SoundManager;
 import edu.noctrl.craig.generic.World;
@@ -29,7 +30,7 @@ public class JetGameView extends SurfaceView implements SurfaceHolder.Callback, 
     private static final String SPRITE_FILE = "sprites.png";
 
     private GameThread gameThread; // controls the game loop
-    private World world;
+    private MyWorld world;
     private SoundManager soundManager;
     private Activity activity; // to display Game Over dialog in GUI thread
     private boolean dialogIsDisplayed = false;
@@ -91,7 +92,7 @@ public class JetGameView extends SurfaceView implements SurfaceHolder.Callback, 
         if (gameOver) // starting a new game after the last game ended
         {
             gameOver = false;
-            world = new World(this, soundManager);
+            world = new MyWorld(this, soundManager);
             world.updateSize(screenWidth, screenHeight);
             this.setOnTouchListener(world);
             gameThread = new GameThread(holder, world); // create thread
