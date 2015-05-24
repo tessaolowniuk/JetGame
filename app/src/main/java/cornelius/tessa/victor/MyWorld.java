@@ -6,6 +6,7 @@ import android.view.View;
 import java.util.Random;
 
 import edu.noctrl.craig.generic.GameSprite;
+import edu.noctrl.craig.generic.Point3F;
 import edu.noctrl.craig.generic.SoundManager;
 import edu.noctrl.craig.generic.World;
 
@@ -16,10 +17,13 @@ public class MyWorld extends World
 {
     private GameSprite enemy;
     private Random rand = new Random();
+    protected MyShip ship;
 
     public MyWorld(StateListener listener, SoundManager sounds)
     {
         super(listener, sounds);
+        ship = new MyShip(this);
+        this.addObject(ship);
 
         // Populates the screen with ten enemies in random positions on a separate thread
         // Enemies spawn 300px from the left edge of the screen
@@ -57,8 +61,14 @@ public class MyWorld extends World
     {
         if(event.getActionMasked() == MotionEvent.ACTION_DOWN)
         {
-
+            Point3F touch = new Point3F(event.getX(), event.getY(), 0);
+            Point3F currentVelocity = ship.baseVelocity.clone();
+            currentVelocity = touch.subtract(ship.position).normalize();
+            ship.baseVelocity = currentVelocity;
+            ship.speedUp();
+            ship.updateVelocity();
         }
+
         return true;
     }
 }
