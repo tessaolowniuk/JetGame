@@ -1,5 +1,6 @@
 package cornelius.tessa.victor;
 
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -17,12 +18,16 @@ public class MyWorld extends World
 {
     private GameSprite enemy;
     private Random rand = new Random();
+    private int stage;
     protected MyShip ship;
 
     public MyWorld(StateListener listener, SoundManager sounds)
     {
         super(listener, sounds);
+        stage = 1;
         ship = new MyShip(this);
+        ship.position.X = 128;
+        ship.position.Y += 765 / 2;
         this.addObject(ship);
 
         // Populates the screen with ten enemies in random positions on a separate thread
@@ -46,6 +51,8 @@ public class MyWorld extends World
                             enemy = new EnemyYellow(MyWorld.this);
                     }
 
+                    Log.i("enemy spawn", "value world width is " + width);
+                    Log.i("enemy spawn", "value world height is " + height);
                     enemy.position.X = width * rand.nextFloat();
                     while(enemy.position.X < 300) enemy.position.X = width * rand.nextFloat();
                     enemy.position.Y = height * rand.nextFloat();
@@ -53,13 +60,17 @@ public class MyWorld extends World
                 }
             }
         }).start();
-
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-        if(event.getActionMasked() == MotionEvent.ACTION_DOWN)
+        if(event.getActionMasked() == MotionEvent.ACTION_DOWN && stage == 1)
+        {
+
+        }
+        //ship is allowed to move in stage 2
+        else if(event.getActionMasked() == MotionEvent.ACTION_DOWN && stage == 2)
         {
             Point3F touch = new Point3F(event.getX(), event.getY(), 0);
             Point3F currentVelocity = ship.baseVelocity.clone();
