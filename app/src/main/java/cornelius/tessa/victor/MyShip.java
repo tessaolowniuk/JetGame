@@ -8,7 +8,7 @@ import edu.noctrl.craig.generic.World;
 
 public class MyShip extends GameSprite {
 
-    protected static final Rect source = new Rect(64, 0, 128, 64);
+    protected static final Rect source = new Rect(64, 14, 128, 50);
     protected static final Point3F scale = Point3F.identity();
 
     public MyShip(World theWorld) {
