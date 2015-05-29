@@ -73,40 +73,33 @@ public class MyWorld extends World
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-        if(event.getActionMasked() == MotionEvent.ACTION_DOWN)
+        switch(event.getActionMasked())
         {
+            case MotionEvent.ACTION_DOWN:
+                /*Point3F touch = new Point3F(0, mPosY, 0);
+                Point3F currentVelocity = ship.baseVelocity.clone();
+                currentVelocity = touch.subtract(ship.position).normalize();
+                ship.baseVelocity = currentVelocity;
+                ship.speedUp();
+                ship.updateVelocity();*/
 
-        }
-        else if(event.getActionMasked() == MotionEvent.ACTION_MOVE)
-        {
-            if(stage == 2)
-            {
-                // Find the index of the active pointer and fetch its position
-                final int pointerIndex = event.findPointerIndex(mActivePointerId);
-                final float x = event.getX(pointerIndex);
-                final float y = event.getY(pointerIndex);
-
-                // Calculate the distance moved
-                final float dy = y - mLastTouchY;
-
-                // Move the object
-                ship.position.Y += dy;
-
-                // Remember this touch position for the next move event
-                mLastTouchY = y;
-            }
-
-
-
-            /*Point3F touch = new Point3F(0, mPosY, 0);
-            Point3F currentVelocity = ship.baseVelocity.clone();
-            currentVelocity = touch.subtract(ship.position).normalize();
-            ship.baseVelocity = currentVelocity;
-            ship.speedUp();
-            ship.updateVelocity();*/
-
-            // Invalidate to request a redraw
-            //invalidate();
+                // Invalidate to request a redraw
+                //invalidate();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if(stage == 2)
+                {
+                    // Find the index of the active pointer and fetch its position
+                    final int pointerIndex = event.findPointerIndex(mActivePointerId);
+                    final float y = event.getY(pointerIndex);
+                    // Calculate the distance moved
+                    final float dy = y - mLastTouchY;
+                    // Move the object
+                    ship.position.Y += dy;
+                    // Remember this touch position for the next move event
+                    mLastTouchY = y;
+                }
+                break;
         }
 
         return true;
