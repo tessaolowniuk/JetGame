@@ -1,8 +1,11 @@
 package cornelius.tessa.victor;
 
-import android.util.Log;
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.deitel.cannongame.R;
 
 import java.util.Random;
 
@@ -13,7 +16,8 @@ import edu.noctrl.craig.generic.World;
 /**
  * Created by Cornelius on 5/21/2015.
  */
-public class MyWorld extends World
+
+public class MyWorld extends World implements MediaPlayer.OnCompletionListener
 {
     private GameSprite enemy;
     private Random rand = new Random();
@@ -28,10 +32,17 @@ public class MyWorld extends World
     float mPosX;
     float mPosY;
 
-    public MyWorld(StateListener listener, SoundManager sounds)
+    public MyWorld(StateListener listener, SoundManager sounds, Context context)
     {
         super(listener, sounds);
-        stage = 2;
+
+        // Sound initialization
+        MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.game_music);
+        mediaPlayer.setOnCompletionListener(this);
+        mediaPlayer.start(); // no need to call prepare() here because create() does that for you
+
+        // Enivronment initialization
+        stage = 2;  // starting at stage 2 to test movement code
         ship = new MyShip(this);
         ship.position.X = 128;
         ship.position.Y += 765 / 2;
@@ -59,8 +70,6 @@ public class MyWorld extends World
                             enemy = new EnemyYellow(MyWorld.this);
                     }
 
-                    Log.i("enemy spawn", "value world width is " + width);
-                    Log.i("enemy spawn", "value world height is " + height);
                     enemy.position.X = width * rand.nextFloat();
                     while(enemy.position.X < 300) enemy.position.X = width * rand.nextFloat();
                     enemy.position.Y = height * rand.nextFloat();
@@ -103,5 +112,15 @@ public class MyWorld extends World
         }
 
         return true;
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp)
+    {
+        try
+        {
+            mp.start();
+        }
+        catch(Exception e) { e.printStackTrace(); }
     }
 }
