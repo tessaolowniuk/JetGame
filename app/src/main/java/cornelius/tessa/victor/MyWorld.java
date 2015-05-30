@@ -7,7 +7,6 @@ import android.view.View;
 import java.util.Random;
 
 import edu.noctrl.craig.generic.GameSprite;
-import edu.noctrl.craig.generic.Point3F;
 import edu.noctrl.craig.generic.SoundManager;
 import edu.noctrl.craig.generic.World;
 
@@ -21,13 +20,22 @@ public class MyWorld extends World
     private int stage;
     protected MyShip ship;
 
+    // Motion Variables
+    // The ‘active pointer’ is the one currently moving our object.
+    private int mActivePointerId;
+    float mLastTouchX;
+    float mLastTouchY;
+    float mPosX;
+    float mPosY;
+
     public MyWorld(StateListener listener, SoundManager sounds)
     {
         super(listener, sounds);
-        stage = 1;
+        stage = 2;
         ship = new MyShip(this);
         ship.position.X = 128;
         ship.position.Y += 765 / 2;
+        mLastTouchY = ship.position.Y;
         this.addObject(ship);
 
         // Populates the screen with ten enemies in random positions on a separate thread
@@ -65,19 +73,33 @@ public class MyWorld extends World
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-        if(event.getActionMasked() == MotionEvent.ACTION_DOWN && stage == 1)
+        switch(event.getActionMasked())
         {
+            case MotionEvent.ACTION_DOWN:
+                /*Point3F touch = new Point3F(0, mPosY, 0);
+                Point3F currentVelocity = ship.baseVelocity.clone();
+                currentVelocity = touch.subtract(ship.position).normalize();
+                ship.baseVelocity = currentVelocity;
+                ship.speedUp();
+                ship.updateVelocity();*/
 
-        }
-        //ship is allowed to move in stage 2
-        else if(event.getActionMasked() == MotionEvent.ACTION_DOWN && stage == 2)
-        {
-            Point3F touch = new Point3F(event.getX(), event.getY(), 0);
-            Point3F currentVelocity = ship.baseVelocity.clone();
-            currentVelocity = touch.subtract(ship.position).normalize();
-            ship.baseVelocity = currentVelocity;
-            ship.speedUp();
-            ship.updateVelocity();
+                // Invalidate to request a redraw
+                //invalidate();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if(stage == 2)
+                {
+                    // Find the index of the active pointer and fetch its position
+                    final int pointerIndex = event.findPointerIndex(mActivePointerId);
+                    final float y = event.getY(pointerIndex);
+                    // Calculate the distance moved
+                    final float dy = y - mLastTouchY;
+                    // Move the object
+                    ship.position.Y += dy;
+                    // Remember this touch position for the next move event
+                    mLastTouchY = y;
+                }
+                break;
         }
 
         return true;
