@@ -25,17 +25,10 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     private int stage;
     protected MyShip ship;
 
-    private int shipFireCount;
-    private int enemyFireCount;
-
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
     private int mActivePointerId;
-    float mLastTouchX;
     float mLastTouchY;
-    float mPosX;
-    float mPosY;
-
 
     public MyWorld(StateListener listener, SoundManager sounds, Context context)
     {
@@ -87,19 +80,22 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
+        ShipLaser shipLaser = new ShipLaser(this);
+        shipLaser.position.Y = ship.position.Y;
+        shipLaser.position.X = ship.position.X;
+        Point3F touch = new Point3F(event.getX(), event.getY(), 0);
+        
         switch(event.getActionMasked())
         {
             case MotionEvent.ACTION_DOWN:
-                /*Point3F touch = new Point3F(event.getX(), event.getY(), 0);
-                Point3F currentVelocity = ship.baseVelocity.clone();
-                currentVelocity = touch.subtract(ship.position).normalize();
-                ship.baseVelocity = currentVelocity;
-                ship.speedUp();
-                ship.updateVelocity();*/
-
-                // Invalidate to request a redraw
-                //invalidate();
+                if(stage == 1)
+                {
+                    // have to add object in switch case in order to avoid animation bug
+                    this.addObject(shipLaser);
+                    shipLaser.fireAtPos(touch);
+                }
                 break;
+
             case MotionEvent.ACTION_MOVE:
                 if(stage == 2)
                 {
@@ -116,17 +112,12 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN:
-                ShipLaser shipLaser = new ShipLaser(this);
-                shipLaser.position.Y = ship.position.Y;
-                shipLaser.position.X = ship.position.X;
-                this.addObject(shipLaser);
-
-                Point3F touch = new Point3F(event.getX(), event.getY(), 0);
-                Point3F currentVelocity = shipLaser.baseVelocity.clone();
-                currentVelocity = touch.subtract(shipLaser.position).normalize();
-                shipLaser.baseVelocity = currentVelocity;
-                shipLaser.speedUp();
-                shipLaser.updateVelocity();
+                if(stage == 2)
+                {
+                    // have to add object in switch case in order to avoid animation bug
+                    this.addObject(shipLaser);
+                    shipLaser.fire(touch);
+                }
                 break;
         }
 

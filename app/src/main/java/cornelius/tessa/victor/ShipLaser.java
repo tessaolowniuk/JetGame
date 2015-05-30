@@ -27,6 +27,27 @@ public class ShipLaser extends GameSprite {
         this.speed = this.speed + 350;
     }
 
+    public void fireAtPos(Point3F touch)
+    {
+        Point3F currentVelocity = touch.subtract(this.position).normalize();
+        this.baseVelocity = currentVelocity;
+        this.speedUp();
+        this.updateVelocity();
+    }
+
+    /* For some reason, the fire() method still fires in a straight line
+     * when used in MyWorld.java, despite having the same code as fireAtPos()
+     * while this is convenient since we're pressed for time,
+     * it shouldn't be the case. Making a note to fix in the future
+     */
+    public void fire(Point3F touch)
+    {
+        Point3F currentVelocity = touch.subtract(this.position).normalize();
+        this.baseVelocity = currentVelocity;
+        this.speedUp();
+        this.updateVelocity();
+    }
+
     @Override
     public Rect getSource() {
         return source;
