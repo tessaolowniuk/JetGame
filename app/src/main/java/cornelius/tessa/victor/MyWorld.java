@@ -10,6 +10,7 @@ import com.deitel.cannongame.R;
 import java.util.Random;
 
 import edu.noctrl.craig.generic.GameSprite;
+import edu.noctrl.craig.generic.Point3F;
 import edu.noctrl.craig.generic.SoundManager;
 import edu.noctrl.craig.generic.World;
 
@@ -24,6 +25,9 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     private int stage;
     protected MyShip ship;
 
+    private int shipFireCount;
+    private int enemyFireCount;
+
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
     private int mActivePointerId;
@@ -31,6 +35,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     float mLastTouchY;
     float mPosX;
     float mPosY;
+
 
     public MyWorld(StateListener listener, SoundManager sounds, Context context)
     {
@@ -85,7 +90,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         switch(event.getActionMasked())
         {
             case MotionEvent.ACTION_DOWN:
-                /*Point3F touch = new Point3F(0, mPosY, 0);
+                /*Point3F touch = new Point3F(event.getX(), event.getY(), 0);
                 Point3F currentVelocity = ship.baseVelocity.clone();
                 currentVelocity = touch.subtract(ship.position).normalize();
                 ship.baseVelocity = currentVelocity;
@@ -108,6 +113,20 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                     // Remember this touch position for the next move event
                     mLastTouchY = y;
                 }
+                break;
+
+            case MotionEvent.ACTION_POINTER_DOWN:
+                ShipLaser shipLaser = new ShipLaser(this);
+                shipLaser.position.Y = ship.position.Y;
+                shipLaser.position.X = ship.position.X;
+                this.addObject(shipLaser);
+
+                Point3F touch = new Point3F(event.getX(), event.getY(), 0);
+                Point3F currentVelocity = shipLaser.baseVelocity.clone();
+                currentVelocity = touch.subtract(shipLaser.position).normalize();
+                shipLaser.baseVelocity = currentVelocity;
+                shipLaser.speedUp();
+                shipLaser.updateVelocity();
                 break;
         }
 
