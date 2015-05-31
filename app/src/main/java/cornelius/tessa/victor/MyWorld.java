@@ -10,6 +10,7 @@ import com.deitel.cannongame.R;
 import java.util.Random;
 
 import edu.noctrl.craig.generic.GameSprite;
+import edu.noctrl.craig.generic.Point3F;
 import edu.noctrl.craig.generic.SoundManager;
 import edu.noctrl.craig.generic.World;
 
@@ -27,10 +28,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
     private int mActivePointerId;
-    float mLastTouchX;
     float mLastTouchY;
-    float mPosX;
-    float mPosY;
 
     public MyWorld(StateListener listener, SoundManager sounds, Context context)
     {
@@ -82,19 +80,22 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
+        ShipLaser shipLaser = new ShipLaser(this);
+        shipLaser.position.Y = ship.position.Y;
+        shipLaser.position.X = ship.position.X;
+        Point3F touch = new Point3F(event.getX(), event.getY(), 0);
+        
         switch(event.getActionMasked())
         {
             case MotionEvent.ACTION_DOWN:
-                /*Point3F touch = new Point3F(0, mPosY, 0);
-                Point3F currentVelocity = ship.baseVelocity.clone();
-                currentVelocity = touch.subtract(ship.position).normalize();
-                ship.baseVelocity = currentVelocity;
-                ship.speedUp();
-                ship.updateVelocity();*/
-
-                // Invalidate to request a redraw
-                //invalidate();
+                if(stage == 1)
+                {
+                    // have to add object in switch case in order to avoid animation bug
+                    this.addObject(shipLaser);
+                    shipLaser.fireAtPos(touch);
+                }
                 break;
+
             case MotionEvent.ACTION_MOVE:
                 if(stage == 2)
                 {
@@ -107,6 +108,15 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                     ship.position.Y += dy;
                     // Remember this touch position for the next move event
                     mLastTouchY = y;
+                }
+                break;
+
+            case MotionEvent.ACTION_POINTER_DOWN:
+                if(stage == 2)
+                {
+                    // have to add object in switch case in order to avoid animation bug
+                    this.addObject(shipLaser);
+                    shipLaser.fire(touch);
                 }
                 break;
         }
