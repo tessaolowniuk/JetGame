@@ -24,7 +24,7 @@ public class ShipLaser extends GameSprite {
     }
 
     public void speedUp() {
-        this.speed = this.speed + 350;
+        this.speed = this.speed + 1500;
     }
 
     public void fireAtPos(Point3F touch)
