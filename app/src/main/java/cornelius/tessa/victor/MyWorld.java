@@ -25,6 +25,8 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     private int stage;
     protected MyShip ship;
 
+    protected Context context;
+
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
     private int mActivePointerId;
@@ -33,9 +35,10 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     public MyWorld(StateListener listener, SoundManager sounds, Context context)
     {
         super(listener, sounds);
+        this.context = context;
 
         // Sound initialization
-        MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.game_music);
+        MediaPlayer mediaPlayer = MediaPlayer.create(this.context, R.raw.game_music);
         mediaPlayer.setOnCompletionListener(this);
         mediaPlayer.start(); // no need to call prepare() here because create() does that for you
 
