@@ -1,28 +1,37 @@
 package cornelius.tessa.victor;
 
-import android.content.Context;
 import android.graphics.Rect;
 
 import edu.noctrl.craig.generic.GameObject;
 import edu.noctrl.craig.generic.GameSprite;
 import edu.noctrl.craig.generic.Point3F;
 
-public class MyShip extends GameSprite {
+/**
+ * Created by Vic on 6/2/2015.
+ */
+public class EnemyLaser extends GameSprite {
 
-    protected static final Rect source = new Rect(64, 14, 128, 50);
+    protected static final Rect source = new Rect(256, 80, 272, 89);
     protected static final Point3F scale = Point3F.identity();
-    protected Context context;
 
-    public MyShip(MyWorld theWorld) {
+    public EnemyLaser(MyWorld theWorld)
+    {
         super(theWorld);
         this.speed = 0;
         this.baseVelocity = new Point3F(1,1,0);
         this.updateVelocity();
-        this.context = theWorld.context;
+
+        //set up for collision
+        this.substance = Collision.Solid;
+        this.collidesWith = Collision.SolidAI;
     }
 
     public void speedUp() {
-        this.speed = this.speed + 50;
+        this.speed = this.speed + 1500;
+    }
+
+    public void fire(Point3F touch)
+    {
     }
 
     @Override
@@ -45,4 +54,3 @@ public class MyShip extends GameSprite {
     {
     }
 }
-
