@@ -30,3 +30,5 @@ proguard/
 
 # Log Files 
 *.log 
+app/src/main/assets/Thumbs.db
+app/hs_err_pid1396.log

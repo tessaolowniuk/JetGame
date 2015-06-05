@@ -70,7 +70,7 @@ public class ShipLaser extends GameSprite {
     @Override
     public void collision(GameObject other)
     {
-        EnemyBlack victim = (EnemyBlack) other;
+        Enemy victim = (Enemy) other;
         victim.die();
     }
 }

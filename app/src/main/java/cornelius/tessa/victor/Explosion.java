@@ -2,6 +2,7 @@ package cornelius.tessa.victor;
 
 import android.graphics.Rect;
 
+import edu.noctrl.craig.generic.GameObject;
 import edu.noctrl.craig.generic.GameSprite;
 import edu.noctrl.craig.generic.Point3F;
 
@@ -13,7 +14,7 @@ public class Explosion extends GameSprite
     protected static final Rect source = new Rect(329, 68, 358, 91);
     protected static final Point3F scale = Point3F.identity();
 
-    public Explosion(MyWorld theWorld, EnemyBlack victim)
+    public Explosion(MyWorld theWorld, GameObject victim)
     {
         super(theWorld);
 
