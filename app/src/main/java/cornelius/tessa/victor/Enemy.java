@@ -1,29 +1,33 @@
 package cornelius.tessa.victor;
 
-import android.graphics.Rect;
+import android.content.Context;
 
+import edu.noctrl.craig.generic.GameObject;
 import edu.noctrl.craig.generic.GameSprite;
 import edu.noctrl.craig.generic.Point3F;
 
 /**
- * Created by Cornelius on 5/21/2015.
+ * Created by Cornelius on 6/4/2015.
  */
-public class Enemy extends GameSprite
+public abstract class Enemy extends GameSprite
 {
-    final static Rect enemy = new Rect(192,65,213,79);
-    final static Point3F scale = Point3F.identity();
+    protected final static Point3F scale = Point3F.identity();
+    protected MyWorld world;
+    protected Context context;
 
     public Enemy(MyWorld theWorld)
     {
         super(theWorld);
+        world = theWorld;
         this.position = new Point3F(1, 1, 0);
+        this.context = world.context;
+
+        //set up for collision
+        this.substance = Collision.SolidAI;
+        this.collidesWith = Collision.SolidPlayer;
     }
 
-    @Override
-    public Rect getSource()
-    {
-        return enemy;
-    }
+    public abstract void die();
 
     @Override
     public Point3F getScale()
@@ -33,6 +37,12 @@ public class Enemy extends GameSprite
 
     @Override
     public void cull()
+    {
+
+    }
+
+    @Override
+    public void collision(GameObject other)
     {
 
     }

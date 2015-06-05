@@ -2,8 +2,6 @@ package cornelius.tessa.victor;
 
 import android.graphics.Rect;
 
-import com.deitel.cannongame.JetGameView;
-
 import edu.noctrl.craig.generic.GameObject;
 import edu.noctrl.craig.generic.GameSprite;
 import edu.noctrl.craig.generic.Point3F;
@@ -52,7 +50,6 @@ public class ShipLaser extends GameSprite {
         this.baseVelocity = currentVelocity;
         this.speedUp();
         this.updateVelocity();
-        world.shotsFired ++;
     }
 
     @Override
@@ -71,10 +68,9 @@ public class ShipLaser extends GameSprite {
     }
 
     @Override
-    public void collision(GameObject other) {
-
-        EnemyBlack victim = (EnemyBlack) other;
+    public void collision(GameObject other)
+    {
+        Enemy victim = (Enemy) other;
         victim.die();
-        world.enemyKill ++;
     }
 }

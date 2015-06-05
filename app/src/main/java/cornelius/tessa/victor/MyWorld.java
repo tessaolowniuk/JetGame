@@ -62,7 +62,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                     switch(rand.nextInt(3))
                     {
                         case 0:
-                            enemy = new Enemy(MyWorld.this);
+                            enemy = new EnemyBlue(MyWorld.this);
                             break;
                         case 1:
                             enemy = new EnemyBlack(MyWorld.this);
