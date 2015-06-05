@@ -28,6 +28,11 @@ public class World implements View.OnTouchListener {
     protected static final float TARGET_PIXELS_PER_METER = 64F/30F;//ship len = 30m  ship base = 64px
     public static float PIXELS_PER_METER = 64F/30F;//ship len = 30m  ship base = 64px
     public double totalElapsedTime = 0;
+    public int shotsFired;
+    public int enemyKill;
+    public int enemyHit;
+    public int score;
+    public int remaining;
     public int width;
     public int height;
     public StateListener listener;

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import cornelius.tessa.victor.MyWorld;
+import cornelius.tessa.victor.ShipLaser;
 import edu.noctrl.craig.generic.GameSprite;
 import edu.noctrl.craig.generic.SoundManager;
 import edu.noctrl.craig.generic.World;
@@ -96,6 +97,9 @@ public class JetGameView extends SurfaceView implements SurfaceHolder.Callback, 
             world.updateSize(screenWidth, screenHeight);
             this.setOnTouchListener(world);
             gameThread = new GameThread(holder, world); // create thread
+            world.shotsFired = 0;
+            world.enemyKill = 0;
+            world.score = 0;
             gameThread.start(); // start the game loop thread
         }
     } // end method newGame
@@ -111,15 +115,14 @@ public class JetGameView extends SurfaceView implements SurfaceHolder.Callback, 
                         // create dialog displaying String resource for messageId
                         AlertDialog.Builder builder =
                                 new AlertDialog.Builder(getActivity());
-                        //builder.setTitle(getResources().getString(messageId));
-
+                        //builder.setTitle(getResources().getString(messageId))
                         // display number of shots fired and total time elapsed
                         builder.setMessage(getResources().getString(
                                 R.string.results_format,
-                                0,//world.shotsFired,
-                                0,//world.kills,
-                                0,//world.remaining,
-                                0,//world.score,
+                                world.shotsFired,
+                                world.enemyKill,
+                                world.remaining,
+                                world.score,
                                 world.totalElapsedTime));
                         builder.setPositiveButton(R.string.reset_game,
                                 new DialogInterface.OnClickListener() {
