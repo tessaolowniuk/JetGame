@@ -9,8 +9,8 @@ import edu.noctrl.craig.generic.Point3F;
 /**
  * Created by Vic on 5/30/2015.
  */
-public class ShipLaser extends GameSprite {
-
+public class ShipLaser extends GameSprite
+{
     protected static final Rect source = new Rect(256, 69, 272, 76);
     protected static final Point3F scale = Point3F.identity();
 

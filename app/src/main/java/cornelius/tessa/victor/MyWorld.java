@@ -1,12 +1,14 @@
 package cornelius.tessa.victor;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.deitel.cannongame.R;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import edu.noctrl.craig.generic.GameSprite;
@@ -23,19 +25,31 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     private GameSprite enemy;
     private Random rand = new Random();
     private int stage;
+    private int score;
+    private ArrayList<Integer> highScores;
     protected MyShip ship;
-
     protected Context context;
+
+    final int HIGH_SCORE_MAX = 5;
 
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
     private int mActivePointerId;
     float mLastTouchY;
 
+    final int MAX_LIST_SIZE = 5;
+    final String PREF_NAME = "JetGame Scores";
+
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
+
     public MyWorld(StateListener listener, SoundManager sounds, Context context)
     {
         super(listener, sounds);
         this.context = context;
+        sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        highScores = new ArrayList<>();
 
         // Sound initialization
         MediaPlayer mediaPlayer = MediaPlayer.create(this.context, R.raw.game_music);
@@ -49,6 +63,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         ship.position.Y += 765 / 2;
         mLastTouchY = ship.position.Y;
         this.addObject(ship);
+        retrieveHighScores();
 
         // Populates the screen with ten enemies in random positions on a separate thread
         // Enemies spawn 300px from the left edge of the screen
@@ -123,7 +138,6 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 }
                 break;
         }
-
         return true;
     }
 
@@ -135,5 +149,57 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
             mp.start();
         }
         catch(Exception e) { e.printStackTrace(); }
+    }
+
+    public void updateHighScores()
+    {
+        if(highScores.size() == 0)
+            highScores.add(score);
+        else
+        {
+            Boolean openSpaces = highScores.size() < HIGH_SCORE_MAX ? true : false;
+
+            for(int highScore : highScores)
+            {
+                if(score > highScore)
+                {
+                    int pos = highScores.indexOf(highScore);
+                    highScores.add(pos, score);
+                    break;
+                }
+            }
+
+            // current score may not be the highest
+            if(openSpaces)
+                highScores.add(score);
+        }
+
+        //clear out extras
+        if(highScores.size() >= HIGH_SCORE_MAX)
+            for(int i = highScores.size() - 1; highScores.size() != HIGH_SCORE_MAX; i--)
+                highScores.remove(i);
+    }
+
+    public void storeHighScores()
+    {
+        if(highScores.size() >= 1)
+        {
+            String highScoreString = "";
+            for(int highScore : highScores)
+                highScoreString += Integer.toString(highScore).trim() + " ";
+            editor.putString("highScores", highScoreString);
+            editor.commit();
+        }
+    }
+
+    public void retrieveHighScores()
+    {
+        String highScoreString = sharedPref.getString("highScores","");
+        if(!highScoreString.isEmpty())
+        {
+            String[] highScoreStringArray = highScoreString.split(" ");
+            for(int i = 0; i < highScoreStringArray.length; i++)
+                highScores.add(Integer.parseInt(highScoreStringArray[i].trim()));
+        }
     }
 }
