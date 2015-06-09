@@ -15,20 +15,20 @@ public class EnemyBlue extends Enemy
 
     }
 
-    public void die() {new Explosion(world, this);}
-
-    public int killScore()
+    public void die()
     {
-<<<<<<< HEAD
-        return value;
-=======
         new Explosion(world, this);
         synchronized (world)
         {
             world.numKills++;
         }
->>>>>>> 649aa280962d7fb5c2ccfc7fa2abb6a0afa6e419
     }
+
+    public int killScore()
+    {
+        return value;
+    }
+    
     @Override
     public Rect getSource()
     {
