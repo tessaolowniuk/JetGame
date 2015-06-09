@@ -23,6 +23,8 @@ public class Explosion extends GameSprite
         this.substance = Collision.None;
 
         theWorld.addObject(this);
+
+        this.kill();
     }
 
     @Override

@@ -72,5 +72,6 @@ public class ShipLaser extends GameSprite
     {
         Enemy victim = (Enemy) other;
         victim.die();
+        victim.kill();
     }
 }
