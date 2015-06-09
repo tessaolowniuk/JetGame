@@ -54,6 +54,7 @@ public class EnemyLaser extends GameSprite {
     public void collision(GameObject other)
     {
         MyShip ship = (MyShip) other;
-
+        ship.die();
+        ship.kill();
     }
 }

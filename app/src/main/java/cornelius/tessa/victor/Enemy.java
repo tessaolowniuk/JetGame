@@ -14,6 +14,7 @@ public abstract class Enemy extends GameSprite
     protected final static Point3F scale = Point3F.identity();
     protected MyWorld world;
     protected Context context;
+    protected int curStage;
 
     public Enemy(MyWorld theWorld)
     {
@@ -21,7 +22,6 @@ public abstract class Enemy extends GameSprite
         world = theWorld;
         this.position = new Point3F(1, 1, 0);
         this.context = world.context;
-
         //set up for collision
         this.substance = Collision.SolidAI;
         this.collidesWith = Collision.SolidPlayer;

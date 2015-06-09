@@ -24,13 +24,15 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
 {
     private GameSprite enemy;
     private Random rand = new Random();
-    private int stage;
     private int score;
     private ArrayList<Integer> highScores;
+    public static int shots;
     protected MyShip ship;
     protected Context context;
     public static int numKills = 0;
+    public static int stage;
     final int HIGH_SCORE_MAX = 5;
+    final int MAX_SHOTS = 5;
 
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
@@ -50,6 +52,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         highScores = new ArrayList<>();
+        shots = 0;
 
         // Sound initialization
         MediaPlayer mediaPlayer = MediaPlayer.create(this.context, R.raw.game_music);
@@ -57,7 +60,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         mediaPlayer.start(); // no need to call prepare() here because create() does that for you
 
         // Enivronment initialization
-        stage = 1;  // starting at stage 2 to test movement code
+        stage = 1;
         ship = new MyShip(this);
         ship.position.X = 128;
         ship.position.Y += 765 / 2;
@@ -72,32 +75,43 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         {
             public void run()
             {
-                while(numKills <= 10)
+                ArrayList<Enemy> enemies = new ArrayList<>();
+                if(stage == 1)
                 {
-                    switch(rand.nextInt(3))
+                    while (numKills <= 10)
                     {
-                        case 0:
-                            enemy = new EnemyBlue(MyWorld.this);
-                            break;
-                        case 1:
-                            enemy = new EnemyBlack(MyWorld.this);
-                            break;
-                        default:
-                            enemy = new EnemyYellow(MyWorld.this);
-                    }
+                        switch (rand.nextInt(3))
+                        {
+                            case 0:
+                                enemy = new EnemyBlue(MyWorld.this);
+                                break;
+                            case 1:
+                                enemy = new EnemyBlack(MyWorld.this);
+                                break;
+                            default:
+                                enemy = new EnemyYellow(MyWorld.this);
+                        }
 
-                    enemy.position.X = width * rand.nextFloat();
-                    while(enemy.position.X < 300) enemy.position.X = width * rand.nextFloat();
-                    enemy.position.Y = height * rand.nextFloat();
-                    addObject(enemy);
-                    try
-                    {
-                        Thread.sleep(rand.nextInt(2000) + 300);
-                    } catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
+                        enemy.position.X = width * rand.nextFloat();
+                        while (enemy.position.X < 300) enemy.position.X = width * rand.nextFloat();
+                        enemy.position.Y = height * rand.nextFloat();
+                        enemies.add((Enemy)enemy);
+                        addObject(enemy);
+                        try
+                        {
+                            Thread.sleep(rand.nextInt(1700) + 300);
+                        } catch (InterruptedException e)
+                        {
+                            e.printStackTrace();
+                        }
                     }
+                    for(Enemy e : enemies)
+                        synchronized (e){ e.kill();}
+                    enemies.clear();
+                    stage++;
                 }
+                else if(stage == 2);
+                else if(stage == 3);
             }
         }).start();
     }
@@ -116,8 +130,12 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 if(stage == 1)
                 {
                     // have to add object in switch case in order to avoid animation bug
-                    this.addObject(shipLaser);
-                    shipLaser.fireAtPos(touch);
+                    if(shots != MAX_SHOTS)
+                    {
+                        this.addObject(shipLaser);
+                        shipLaser.fireAtPos(touch);
+                        shots++;
+                    }
                 }
                 break;
 
