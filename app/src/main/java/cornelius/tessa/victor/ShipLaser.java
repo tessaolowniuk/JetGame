@@ -65,7 +65,8 @@ public class ShipLaser extends GameSprite
     }
 
     @Override
-    public void cull() {
+    public void cull()
+    {
 
     }
 
@@ -74,6 +75,10 @@ public class ShipLaser extends GameSprite
     {
         Enemy victim = (Enemy) other;
         victim.die();
+<<<<<<< HEAD
         myWorld.calculateScore();
+=======
+        victim.kill();
+>>>>>>> 5810eeaf71b900acaedaba8135849ebdabb63ef4
     }
 }

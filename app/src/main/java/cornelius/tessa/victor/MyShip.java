@@ -12,6 +12,7 @@ public class MyShip extends GameSprite {
     protected static final Rect source = new Rect(64, 14, 128, 50);
     protected static final Point3F scale = Point3F.identity();
     protected Context context;
+    protected MyWorld world;
 
     public MyShip(MyWorld theWorld) {
         super(theWorld);
@@ -35,14 +36,21 @@ public class MyShip extends GameSprite {
         return scale;
     }
 
+    public void die()
+    {
+        new Explosion(world, this);
+    }
+
     @Override
-    public void cull() {
+    public void cull()
+    {
 
     }
 
     @Override
     public void collision(GameObject other)
     {
+
     }
 }
 

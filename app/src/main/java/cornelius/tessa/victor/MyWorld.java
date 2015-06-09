@@ -32,6 +32,10 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     private ArrayList<Integer> highScores;
     protected MyShip ship;
     protected Context context;
+<<<<<<< HEAD
+=======
+    public static int numKills = 0;
+>>>>>>> 5810eeaf71b900acaedaba8135849ebdabb63ef4
     final int HIGH_SCORE_MAX = 5;
 
     // Motion Variables
@@ -59,7 +63,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         mediaPlayer.start(); // no need to call prepare() here because create() does that for you
 
         // Enivronment initialization
-        stage = 2;  // starting at stage 2 to test movement code
+        stage = 1;  // starting at stage 2 to test movement code
         ship = new MyShip(this);
         ship.position.X = 128;
         ship.position.Y += 765 / 2;
@@ -74,7 +78,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         {
             public void run()
             {
-                for(int i = 0; i < 10; i++)
+                while(numKills <= 10)
                 {
                     switch(rand.nextInt(3))
                     {
@@ -92,6 +96,13 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                     while(enemy.position.X < 300) enemy.position.X = width * rand.nextFloat();
                     enemy.position.Y = height * rand.nextFloat();
                     addObject(enemy);
+                    try
+                    {
+                        Thread.sleep(rand.nextInt(2000) + 300);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).start();

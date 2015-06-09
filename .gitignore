@@ -32,3 +32,9 @@ proguard/
 *.log 
 app/src/main/assets/Thumbs.db
 app/hs_err_pid1396.log
+.gradle/2.2.1/taskArtifacts/cache.properties.lock
+.gradle/2.2.1/taskArtifacts/fileHashes.bin
+.gradle/2.2.1/taskArtifacts/fileSnapshots.bin
+.gradle/2.2.1/taskArtifacts/outputFileStates.bin
+.gradle/2.2.1/taskArtifacts/taskArtifacts.bin
+build/intermediates/gradle_project_sync_data.bin
