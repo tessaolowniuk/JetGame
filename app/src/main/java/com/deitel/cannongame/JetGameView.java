@@ -104,6 +104,8 @@ public class JetGameView extends SurfaceView implements SurfaceHolder.Callback, 
         }
     } // end method newGame
 
+
+
     // display an AlertDialog when the game ends
     private void showGameOverDialog(final int messageId) {
         // DialogFragment to display quiz stats and start new quiz

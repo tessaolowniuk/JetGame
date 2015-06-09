@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import java.util.TimerTask;
+
 
 public class JetGameFragment extends Fragment {
     private JetGameView jetGameView; // custom view to display the game
