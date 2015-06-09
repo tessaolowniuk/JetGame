@@ -27,12 +27,14 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     private int score;
     private ArrayList<Integer> highScores;
     public static int shots;
+    public static int enemyShots;
     protected MyShip ship;
     protected Context context;
     public static int numKills = 0;
     public static int stage;
     final int HIGH_SCORE_MAX = 5;
     final int MAX_SHOTS = 5;
+    final MyWorld world = this;
 
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
@@ -53,6 +55,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         editor = sharedPref.edit();
         highScores = new ArrayList<>();
         shots = 0;
+        enemyShots = 0;
 
         // Sound initialization
         MediaPlayer mediaPlayer = MediaPlayer.create(this.context, R.raw.game_music);
@@ -156,8 +159,16 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                                 if(rand.nextBoolean()) y*=-1;
                                 Point3F vel = new Point3F(x, y, 0);
                                 e.baseVelocity = vel;
-                                e.speed = 500;
+                                e.speed = 300;
                                 e.updateVelocity();
+                                if(enemyShots != MAX_SHOTS)
+                                {
+                                    EnemyLaser enemyLaser = new EnemyLaser(world);
+                                    enemyLaser.position.Y = e.position.Y;
+                                    enemyLaser.position.X = e.position.X;
+                                    addObject(enemyLaser);
+                                    enemyLaser.fire();
+                                }
                             }
                         }
                         for (Enemy e : enemies)

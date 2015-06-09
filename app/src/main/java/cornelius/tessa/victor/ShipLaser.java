@@ -22,7 +22,7 @@ public class ShipLaser extends GameSprite
         this.updateVelocity();
 
         //set up for collision
-        this.substance = Collision.Solid;
+        this.substance = Collision.SolidPlayer;
         this.collidesWith = Collision.SolidAI;
 
     }

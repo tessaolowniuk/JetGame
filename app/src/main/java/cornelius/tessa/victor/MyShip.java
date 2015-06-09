@@ -20,6 +20,7 @@ public class MyShip extends GameSprite {
         this.baseVelocity = new Point3F(1,1,0);
         this.updateVelocity();
         this.context = theWorld.context;
+        this.substance = Collision.SolidPlayer;
     }
 
     public void speedUp() {
