@@ -51,7 +51,7 @@ public class ShipLaser extends GameSprite
         this.baseVelocity = currentVelocity;
         this.speedUp();
         this.updateVelocity();
-        world.shotsFired ++;
+        myWorld.shotsFired ++;
     }
 
     @Override
@@ -75,10 +75,7 @@ public class ShipLaser extends GameSprite
     {
         Enemy victim = (Enemy) other;
         victim.die();
-<<<<<<< HEAD
-        myWorld.calculateScore();
-=======
         victim.kill();
->>>>>>> 5810eeaf71b900acaedaba8135849ebdabb63ef4
+        //myWorld.calculateScore();
     }
 }

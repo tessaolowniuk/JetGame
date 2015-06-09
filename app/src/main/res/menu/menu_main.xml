@@ -1,7 +1,15 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/stageSelection"
-        android:title="@string/stageSelection"/>
+        android:title="@string/stageSelection">
+        <menu>
+        <item android:id="@+id/stage1"
+            android:title="@string/stage1"/>
+        <item android:id="@+id/stage2"
+            android:title="@string/stage2"/>
+        <item android:id="@+id/stage3"
+            android:title="@string/stage3"/>
+    </menu></item>
 
     <item android:id="@+id/highScores"
         android:title="@string/highScores"/>

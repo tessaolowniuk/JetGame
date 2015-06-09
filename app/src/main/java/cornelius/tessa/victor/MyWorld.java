@@ -27,15 +27,16 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
 {
     private GameSprite enemy;
     private Random rand = new Random();
-    private int stage;
+    public int stage;
     public int score;
+    public int enemyKill;
+    public int enemyHit;
+    public int shotsFired;
     private ArrayList<Integer> highScores;
     protected MyShip ship;
     protected Context context;
-<<<<<<< HEAD
-=======
     public static int numKills = 0;
->>>>>>> 5810eeaf71b900acaedaba8135849ebdabb63ef4
+
     final int HIGH_SCORE_MAX = 5;
 
     // Motion Variables
@@ -219,49 +220,9 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
     public void calculateScore()
     {
         enemyKill ++;
+        score ++;
 
-        //if()
-       // {
-
-       // }
     }
 
-    //Displays about message
-    public void about()
-    {
-        new AlertDialog.Builder(context)
-                .setTitle("About")
-                .setMessage("This game was created by Cornelius, Tessa, & Victor. Homage to Brain Craig, for game engine")
-                .setNeutralButton("Ok", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .show();
-    }
-    //Allows user to select which stage they would like to play
-    public void stageSelection()
-    {
-        new AlertDialog.Builder(context)
-                .setTitle("Stage Selection")
-                .setMessage("Choose the stage you would like to play:")
-                .setNeutralButton("Stage 1", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                })
-                .setNeutralButton("Stage 2", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-
-                    }
-                })
-                .setNeutralButton("Stage 3", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .show();
-    }
 }

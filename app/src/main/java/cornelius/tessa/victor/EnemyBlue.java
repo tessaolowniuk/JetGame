@@ -12,13 +12,15 @@ public class EnemyBlue extends Enemy
     public EnemyBlue(MyWorld theWorld)
     {
         super(theWorld);
+
     }
 
-    public void die()
+    public void die() {new Explosion(world, this);}
+
+    public int killScore()
     {
-        new Explosion(world, this);
+        return value;
     }
-
     @Override
     public Rect getSource()
     {
