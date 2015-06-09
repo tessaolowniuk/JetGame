@@ -45,12 +45,15 @@ public class EnemyLaser extends GameSprite {
     }
 
     @Override
-    public void cull() {
+    public void cull()
+    {
 
     }
 
     @Override
     public void collision(GameObject other)
     {
+        MyShip ship = (MyShip) other;
+
     }
 }

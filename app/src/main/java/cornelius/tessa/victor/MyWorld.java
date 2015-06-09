@@ -92,7 +92,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                     addObject(enemy);
                     try
                     {
-                        Thread.sleep(rand.nextInt(1000) + 500);
+                        Thread.sleep(rand.nextInt(2000) + 300);
                     } catch (InterruptedException e)
                     {
                         e.printStackTrace();

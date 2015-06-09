@@ -63,7 +63,8 @@ public class ShipLaser extends GameSprite
     }
 
     @Override
-    public void cull() {
+    public void cull()
+    {
 
     }
 
