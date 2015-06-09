@@ -19,7 +19,15 @@ public class EnemyBlue extends Enemy
 
     public int killScore()
     {
+<<<<<<< HEAD
         return value;
+=======
+        new Explosion(world, this);
+        synchronized (world)
+        {
+            world.numKills++;
+        }
+>>>>>>> 649aa280962d7fb5c2ccfc7fa2abb6a0afa6e419
     }
     @Override
     public Rect getSource()

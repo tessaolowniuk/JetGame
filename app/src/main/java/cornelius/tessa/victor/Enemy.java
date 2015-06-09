@@ -20,8 +20,10 @@ public abstract class Enemy extends GameSprite
         super(theWorld);
         world = theWorld;
         this.position = new Point3F(1, 1, 0);
+        this.speed = 0;
+        this.baseVelocity = new Point3F(1,1,0);
+        this.updateVelocity();
         this.context = world.context;
-
         //set up for collision
         this.substance = Collision.SolidAI;
         this.collidesWith = Collision.SolidPlayer;
@@ -39,10 +41,6 @@ public abstract class Enemy extends GameSprite
     public void cull()
     {
         this.kill();
-        synchronized (world)
-        {
-            world.numKills++;
-        }
     }
 
     @Override
