@@ -12,17 +12,23 @@ public class EnemyBlue extends Enemy
     public EnemyBlue(MyWorld theWorld)
     {
         super(theWorld);
+
     }
 
-    public void die()
+    public void die() {new Explosion(world, this);}
+
+    public int killScore()
     {
+<<<<<<< HEAD
+        return value;
+=======
         new Explosion(world, this);
         synchronized (world)
         {
             world.numKills++;
         }
+>>>>>>> 649aa280962d7fb5c2ccfc7fa2abb6a0afa6e419
     }
-
     @Override
     public Rect getSource()
     {

@@ -1,8 +1,11 @@
 package cornelius.tessa.victor;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -24,14 +27,26 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
 {
     private GameSprite enemy;
     private Random rand = new Random();
+<<<<<<< HEAD
+    public int stage;
+    public int score;
+    public int enemyKill;
+    public int enemyHit;
+    public int shotsFired;
+=======
     private int score;
+>>>>>>> 649aa280962d7fb5c2ccfc7fa2abb6a0afa6e419
     private ArrayList<Integer> highScores;
     public static int shots;
     public static int enemyShots;
     protected MyShip ship;
     protected Context context;
     public static int numKills = 0;
+<<<<<<< HEAD
+
+=======
     public static int stage;
+>>>>>>> 649aa280962d7fb5c2ccfc7fa2abb6a0afa6e419
     final int HIGH_SCORE_MAX = 5;
     final int MAX_SHOTS = 5;
     final MyWorld world = this;
@@ -299,4 +314,13 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 highScores.add(Integer.parseInt(highScoreStringArray[i].trim()));
         }
     }
+    //Calculates the player's score
+    public void calculateScore()
+    {
+        enemyKill ++;
+        score ++;
+
+    }
+
+
 }
