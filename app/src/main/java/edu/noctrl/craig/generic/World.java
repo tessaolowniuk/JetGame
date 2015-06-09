@@ -3,6 +3,7 @@ package edu.noctrl.craig.generic;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -20,6 +21,8 @@ public class World implements View.OnTouchListener {
         return true;
     }
 
+
+
     public static interface StateListener{
         public void onGameOver(boolean lost);
     }
@@ -31,7 +34,6 @@ public class World implements View.OnTouchListener {
     public int shotsFired;
     public int enemyKill;
     public int enemyHit;
-    public int score;
     public int remaining;
     public int width;
     public int height;

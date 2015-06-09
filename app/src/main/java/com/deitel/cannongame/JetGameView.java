@@ -99,7 +99,7 @@ public class JetGameView extends SurfaceView implements SurfaceHolder.Callback, 
             gameThread = new GameThread(holder, world); // create thread
             world.shotsFired = 0;
             world.enemyKill = 0;
-            world.score = 0;
+            //world.score = 0;
             gameThread.start(); // start the game loop thread
         }
     } // end method newGame

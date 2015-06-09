@@ -13,6 +13,7 @@ public class ShipLaser extends GameSprite
 {
     protected static final Rect source = new Rect(256, 69, 272, 76);
     protected static final Point3F scale = Point3F.identity();
+    MyWorld myWorld;
 
     public ShipLaser(MyWorld theWorld)
     {
@@ -73,6 +74,6 @@ public class ShipLaser extends GameSprite
     {
         Enemy victim = (Enemy) other;
         victim.die();
-        world.enemyKill ++;
+        myWorld.calculateScore();
     }
 }

@@ -1,5 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title=""
-        android:orderInCategory="100" android:showAsAction="never" />
+    <item android:id="@+id/stageSelection"
+        android:title="@string/stageSelection"/>
+
+    <item android:id="@+id/highScores"
+        android:title="@string/highScores"/>
+
+    <item android:id="@+id/about"
+        android:title="@string/about"/>
 </menu>
