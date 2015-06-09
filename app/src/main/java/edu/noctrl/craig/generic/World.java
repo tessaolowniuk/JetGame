@@ -3,6 +3,7 @@ package edu.noctrl.craig.generic;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -28,6 +29,7 @@ public class World implements View.OnTouchListener {
     protected static final float TARGET_PIXELS_PER_METER = 64F/30F;//ship len = 30m  ship base = 64px
     public static float PIXELS_PER_METER = 64F/30F;//ship len = 30m  ship base = 64px
     public double totalElapsedTime = 0;
+    public int remaining;
     public int width;
     public int height;
     public StateListener listener;

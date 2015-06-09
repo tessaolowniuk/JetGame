@@ -8,4 +8,10 @@
     <string name="lose">Game Over!</string>
     <string name="time_remaining_format">Time remaining: %.1f seconds</string>
 
+    <string name="stageSelection">Stage Selection</string>
+    <string name="highScores">High Scores</string>
+    <string name="about">About</string>
+    <string name="stage1">Stage 1</string>
+    <string name="stage2">Stage 2</string>
+    <string name="stage3">Stage 3</string>
 </resources>
