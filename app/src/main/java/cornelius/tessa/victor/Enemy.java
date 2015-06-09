@@ -14,13 +14,15 @@ public abstract class Enemy extends GameSprite
     protected final static Point3F scale = Point3F.identity();
     protected MyWorld world;
     protected Context context;
-    protected int curStage;
 
     public Enemy(MyWorld theWorld)
     {
         super(theWorld);
         world = theWorld;
         this.position = new Point3F(1, 1, 0);
+        this.speed = 0;
+        this.baseVelocity = new Point3F(1,1,0);
+        this.updateVelocity();
         this.context = world.context;
         //set up for collision
         this.substance = Collision.SolidAI;
@@ -39,10 +41,6 @@ public abstract class Enemy extends GameSprite
     public void cull()
     {
         this.kill();
-        synchronized (world)
-        {
-            world.numKills++;
-        }
     }
 
     @Override

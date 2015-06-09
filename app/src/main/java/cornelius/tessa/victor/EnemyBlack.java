@@ -17,6 +17,10 @@ public class EnemyBlack extends Enemy
     public void die()
     {
         new Explosion(world, this);
+        synchronized (world)
+        {
+            world.numKills++;
+        }
     }
 
     @Override
