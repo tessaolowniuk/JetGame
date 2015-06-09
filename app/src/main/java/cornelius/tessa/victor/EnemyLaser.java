@@ -28,6 +28,7 @@ public class EnemyLaser extends GameSprite {
         //set up for collision
         this.substance = Collision.SolidAI;
         this.collidesWith = Collision.SolidPlayer;
+        this.obj_type = Type.ENEMY_SHOT;
     }
 
     public void fire()
@@ -62,14 +63,15 @@ public class EnemyLaser extends GameSprite {
     @Override
     public void collision(GameObject other)
     {
-        synchronized (other)
-        {
-            if(other == null)
-            {
-                MyShip ship = (MyShip) other;
-                ship.die();
-                ship.kill();
-            }
-        }
+        other.kill();
+//        MyShip ship = (MyShip) other;
+//        synchronized (ship)
+//        {
+//            if(ship != null && ship.obj_type == Type.PLAYER)
+//            {
+//                ship.die();
+//                ship.kill();
+//            }
+//        }
     }
 }

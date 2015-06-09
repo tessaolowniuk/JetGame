@@ -25,7 +25,7 @@ public class ShipLaser extends GameSprite
         //set up for collision
         this.substance = Collision.SolidPlayer;
         this.collidesWith = Collision.SolidAI;
-
+        this.obj_type = Type.PLAYER_SHOT;
     }
 
     public void speedUp() {
@@ -51,7 +51,7 @@ public class ShipLaser extends GameSprite
         this.baseVelocity = currentVelocity;
         this.speedUp();
         this.updateVelocity();
-        myWorld.shotsFired ++;
+        //myWorld.shotsFired++;
     }
 
     @Override
@@ -73,9 +73,16 @@ public class ShipLaser extends GameSprite
     @Override
     public void collision(GameObject other)
     {
-        Enemy victim = (Enemy) other;
-        victim.die();
-        victim.kill();
-        //myWorld.calculateScore();
+        other.kill();
+//        synchronized (other)
+//        {
+//            if (other != null && other.obj_type == Type.ENEMY)
+//            {
+//                Enemy victim = (Enemy) other;
+//                //victim.die();
+//                victim.kill();
+//                //myWorld.calculateScore();
+//            }
+//        }
     }
 }

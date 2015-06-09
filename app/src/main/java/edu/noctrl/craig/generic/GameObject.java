@@ -25,6 +25,13 @@ public abstract class GameObject {
         public static final int SolidAI = 4;
         public static final int Solid = 6;
     }
+    public static class Type
+    {
+        public static final int PLAYER = 0;
+        public static final int PLAYER_SHOT = 1;
+        public static final int ENEMY = 2;
+        public static final int ENEMY_SHOT = 3;
+    }
     protected World world;
     public GameObject(World theWorld){
         world = theWorld;
@@ -34,6 +41,7 @@ public abstract class GameObject {
     public ObjectType type = ObjectType.Point;
     public int substance = Collision.None;
     public int collidesWith = Collision.None;
+    public int obj_type;
 
     public Point3F position = new Point3F(0F,0F,0F);
     public Point3F baseVelocity = new Point3F(0F,0F,0F);

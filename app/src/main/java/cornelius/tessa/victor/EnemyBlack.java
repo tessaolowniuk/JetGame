@@ -14,15 +14,6 @@ public class EnemyBlack extends Enemy
         super(theWorld);
     }
 
-    public void die()
-    {
-        new Explosion(world, this);
-        synchronized (world)
-        {
-            world.numKills++;
-        }
-    }
-
     @Override
     public Rect getSource()
     {

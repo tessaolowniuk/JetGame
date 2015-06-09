@@ -66,7 +66,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         mediaPlayer.start(); // no need to call prepare() here because create() does that for you
 
         // Enivronment initialization
-        stage = 2;
+        stage = 1;
         ship = new MyShip(this);
         ship.position.X = 128;
         ship.position.Y += 765 / 2;
@@ -164,7 +164,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                                 e.baseVelocity = vel;
                                 e.speed = 300;
                                 e.updateVelocity();
-                                if(enemyShots != MAX_SHOTS)
+                                if(enemyShots <= MAX_SHOTS)
                                 {
                                     EnemyLaser enemyLaser = new EnemyLaser(world);
                                     enemyLaser.position.Y = e.position.Y;
@@ -201,7 +201,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 if(stage == 1)
                 {
                     // have to add object in switch case in order to avoid animation bug
-                    if(shots != MAX_SHOTS)
+                    if(shots <= MAX_SHOTS)
                     {
                         this.addObject(shipLaser);
                         shipLaser.fireAtPos(touch);
@@ -229,7 +229,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 if(stage == 2)
                 {
                     // have to add object in switch case in order to avoid animation bug
-                    if(shots != MAX_SHOTS)
+                    if(shots <= MAX_SHOTS)
                     {
                         this.addObject(shipLaser);
                         shipLaser.fire(touch);
