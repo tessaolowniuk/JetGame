@@ -14,6 +14,7 @@ public class EnemyYellow extends Enemy
         super(theWorld);
     }
 
+<<<<<<< HEAD
     public void die()
     {
         new Explosion(world, this);
@@ -24,6 +25,8 @@ public class EnemyYellow extends Enemy
         }
     }
 
+=======
+>>>>>>> e0aa8d866b1a629e6435c0109a1784f5741fcc20
     @Override
     public Rect getSource()
     {

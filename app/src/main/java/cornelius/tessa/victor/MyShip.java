@@ -20,6 +20,9 @@ public class MyShip extends GameSprite {
         this.baseVelocity = new Point3F(1,1,0);
         this.updateVelocity();
         this.context = theWorld.context;
+        this.substance = Collision.SolidPlayer;
+        this.collidesWith = Collision.SolidAI;
+        this.obj_type = Type.PLAYER;
     }
 
     public void speedUp() {
@@ -38,7 +41,8 @@ public class MyShip extends GameSprite {
 
     public void die()
     {
-        new Explosion(world, this);
+        if(!this.isDead())
+            new Explosion(world, this);
     }
 
     @Override

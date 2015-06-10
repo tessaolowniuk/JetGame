@@ -15,6 +15,7 @@ public class EnemyBlue extends Enemy
 
     }
 
+<<<<<<< HEAD
     public void die()
     {
         new Explosion(world, this);
@@ -23,7 +24,13 @@ public class EnemyBlue extends Enemy
             world.numKills++;
             world.score += value;
         }
+=======
+    public int killScore()
+    {
+        return value;
+>>>>>>> e0aa8d866b1a629e6435c0109a1784f5741fcc20
     }
+
     @Override
     public Rect getSource()
     {

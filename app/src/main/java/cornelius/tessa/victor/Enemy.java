@@ -27,9 +27,8 @@ public abstract class Enemy extends GameSprite
         //set up for collision
         this.substance = Collision.SolidAI;
         this.collidesWith = Collision.SolidPlayer;
+        this.obj_type = Type.ENEMY;
     }
-
-    public abstract void die();
 
     @Override
     public Point3F getScale()
@@ -40,6 +39,11 @@ public abstract class Enemy extends GameSprite
     @Override
     public void cull()
     {
+        synchronized (world)
+        {
+            world.numKills++;
+        }
+        new Explosion(world, this);
         this.kill();
     }
 

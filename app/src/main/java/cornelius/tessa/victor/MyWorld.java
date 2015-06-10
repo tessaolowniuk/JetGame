@@ -1,12 +1,13 @@
 package cornelius.tessa.victor;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+<<<<<<< HEAD
 import android.os.CountDownTimer;
 import android.view.MenuItem;
+=======
+>>>>>>> e0aa8d866b1a629e6435c0109a1784f5741fcc20
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -30,19 +31,34 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
 {
     private GameSprite enemy;
     private Random rand = new Random();
+<<<<<<< HEAD
     public int enemyKill;
     public int enemyHit;
     public int shotsFired;
     public int score;
+=======
+    public int stage;
+    public int score;
+    public int enemyKill;
+    public int enemyHit;
+    public int shotsFired;
+>>>>>>> e0aa8d866b1a629e6435c0109a1784f5741fcc20
     private ArrayList<Integer> highScores;
     public static int shots;
+    public static int enemyShots;
     protected MyShip ship;
     protected Context context;
     public static int numKills = 0;
+<<<<<<< HEAD
     public static int stage;
     final int HIGH_SCORE_MAX = 5;
     final int MAX_SHOTS = 5;
     EditText timeText;
+=======
+    final int HIGH_SCORE_MAX = 5;
+    final int MAX_SHOTS = 5;
+    final MyWorld world = this;
+>>>>>>> e0aa8d866b1a629e6435c0109a1784f5741fcc20
 
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
@@ -63,6 +79,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         editor = sharedPref.edit();
         highScores = new ArrayList<>();
         shots = 0;
+        enemyShots = 0;
 
         // Sound initialization
         MediaPlayer mediaPlayer = MediaPlayer.create(this.context, R.raw.game_music);
@@ -70,7 +87,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         mediaPlayer.start(); // no need to call prepare() here because create() does that for you
 
         // Enivronment initialization
-        stage = 2;
+        stage = 1;
         ship = new MyShip(this);
         ship.position.X = 128;
         ship.position.Y += 765 / 2;
@@ -168,8 +185,16 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                                 if(rand.nextBoolean()) y*=-1;
                                 Point3F vel = new Point3F(x, y, 0);
                                 e.baseVelocity = vel;
-                                e.speed = 500;
+                                e.speed = 300;
                                 e.updateVelocity();
+                                if(enemyShots <= MAX_SHOTS)
+                                {
+                                    EnemyLaser enemyLaser = new EnemyLaser(world);
+                                    enemyLaser.position.Y = e.position.Y;
+                                    enemyLaser.position.X = e.position.X;
+                                    addObject(enemyLaser);
+                                    enemyLaser.fire();
+                                }
                             }
                         }
                         for (Enemy e : enemies)
@@ -199,7 +224,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 if(stage == 1)
                 {
                     // have to add object in switch case in order to avoid animation bug
-                    if(shots != MAX_SHOTS)
+                    if(shots <= MAX_SHOTS)
                     {
                         this.addObject(shipLaser);
                         shipLaser.fireAtPos(touch);
@@ -227,7 +252,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 if(stage == 2)
                 {
                     // have to add object in switch case in order to avoid animation bug
-                    if(shots != MAX_SHOTS)
+                    if(shots <= MAX_SHOTS)
                     {
                         this.addObject(shipLaser);
                         shipLaser.fire(touch);
