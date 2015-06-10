@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.deitel.cannongame.R;
 
@@ -27,38 +30,30 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
 {
     private GameSprite enemy;
     private Random rand = new Random();
-<<<<<<< HEAD
-    public int stage;
-    public int score;
     public int enemyKill;
     public int enemyHit;
     public int shotsFired;
-=======
-    private int score;
->>>>>>> 649aa280962d7fb5c2ccfc7fa2abb6a0afa6e419
+    public int score;
     private ArrayList<Integer> highScores;
     public static int shots;
     protected MyShip ship;
     protected Context context;
     public static int numKills = 0;
-<<<<<<< HEAD
-
-=======
     public static int stage;
->>>>>>> 649aa280962d7fb5c2ccfc7fa2abb6a0afa6e419
     final int HIGH_SCORE_MAX = 5;
     final int MAX_SHOTS = 5;
+    EditText timeText;
 
     // Motion Variables
     // The ‘active pointer’ is the one currently moving our object.
     private int mActivePointerId;
     float mLastTouchY;
-
     final int MAX_LIST_SIZE = 5;
     final String PREF_NAME = "JetGame Scores";
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
+
 
     public MyWorld(StateListener listener, SoundManager sounds, Context context)
     {
@@ -88,6 +83,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
         // TODO: change spawn location based off of right edge of player ship
         new Thread(new Runnable()
         {
+
             public void run()
             {
                 ArrayList<Enemy> enemies = new ArrayList<>();
@@ -97,6 +93,7 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                     {
                         while (numKills <= 10)
                         {
+
                             switch (rand.nextInt(3))
                             {
                                 case 0:
@@ -303,13 +300,4 @@ public class MyWorld extends World implements MediaPlayer.OnCompletionListener
                 highScores.add(Integer.parseInt(highScoreStringArray[i].trim()));
         }
     }
-    //Calculates the player's score
-    public void calculateScore()
-    {
-        enemyKill ++;
-        score ++;
-
-    }
-
-
 }

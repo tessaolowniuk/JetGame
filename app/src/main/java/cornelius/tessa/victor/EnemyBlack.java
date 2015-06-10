@@ -20,6 +20,7 @@ public class EnemyBlack extends Enemy
         synchronized (world)
         {
             world.numKills++;
+            world.score += value;
         }
     }
 

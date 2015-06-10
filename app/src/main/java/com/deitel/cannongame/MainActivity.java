@@ -13,8 +13,7 @@ import android.widget.Toast;
 import cornelius.tessa.victor.MyWorld;
 
 public class MainActivity extends Activity {
-    private MyWorld myWorld;
-
+    MyWorld myWorld;
     // called when the app first launches
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,7 @@ public class MainActivity extends Activity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.ss
@@ -42,15 +42,15 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.stage1:
-                myWorld.stage = 1;
+                MyWorld.stage = 1;
                 return true;
 
             case R.id.stage2:
-               myWorld.stage = 2;
+               MyWorld.stage = 2;
                 return true;
 
             case R.id.stage3:
-                myWorld.stage = 3;
+                MyWorld.stage = 3;
                 return true;
 
             case R.id.stageSelection:

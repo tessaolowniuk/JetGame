@@ -35,7 +35,7 @@ public class JetGameView extends SurfaceView implements SurfaceHolder.Callback, 
     private SoundManager soundManager;
     private Activity activity; // to display Game Over dialog in GUI thread
     private boolean dialogIsDisplayed = false;
-
+    MyWorld myWorld;
     // variables for the game loop and tracking statistics
     private boolean gameOver; // is the game over?
 
@@ -124,7 +124,7 @@ public class JetGameView extends SurfaceView implements SurfaceHolder.Callback, 
                                 world.shotsFired,
                                 world.enemyKill,
                                 world.remaining,
-                                world.score,
+                                myWorld.score,
                                 world.totalElapsedTime));
                         builder.setPositiveButton(R.string.reset_game,
                                 new DialogInterface.OnClickListener() {
